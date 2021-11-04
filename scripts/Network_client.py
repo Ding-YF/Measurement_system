@@ -18,4 +18,4 @@ while True:
     if not data:
         break
     print(data.decode('utf-8'))
-tcpCliSock
+tcpCliSock.close()
