@@ -21,7 +21,8 @@ while True:
         if not data:
             break
         data = data.decode('utf-8')
-        respMsg = "[%S] %s" % (ctime(),data)
+        #print(data)
+        respMsg = "[%s] %s" % (ctime(),data)
         tcpCliSock.send(bytes(respMsg,'utf-8'))
 
     tcpCliSock.close()
