@@ -23,5 +23,6 @@ while True:
         if img_recv:
             filename, filesize = struct.unpack('128sq', img_recv)
             fn = filename.decode().strip('\x00')  #去掉不可见的字符 \x00
+            print('fn',fn,'filename',filename)
     tcpCliSock.close()
 tcpCliSock.close()
