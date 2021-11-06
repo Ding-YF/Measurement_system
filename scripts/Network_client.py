@@ -8,6 +8,8 @@ ADDR = (HOST,PORT)
 tcpCliSock = socket(AF_INET,SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 
+def transfer():
+    pass
 while True:
     data = input(">>>")
     if not data:
