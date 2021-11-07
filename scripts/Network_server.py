@@ -7,8 +7,8 @@ PORT1 = 8080
 PORT2=8081
 BUFSIZ = 1024
 
-tcpSvrSock=0
-tcpSvrSock2=0
+# tcpSvrSock=0
+# tcpSvrSock2=0
 
 def tcp1(PORT): #第一台设备端口为8080
     global tcpCliSock,addr
@@ -29,7 +29,7 @@ def tcp2(PORT2): #第二台设备端口为8081
     while True:
         print("waiting second for connection !!!")
         tcpCliSock2,addr2 = tcpSvrSock2.accept()
-        print("connect form",addr)
+        print("connect form",addr2)
 
 
 #多线程
@@ -58,7 +58,3 @@ while True:
         print('data from ', addr2, data)
 
 tcpCliSock.close()
-
-
-if __name__ == '__main__':
-    pass
