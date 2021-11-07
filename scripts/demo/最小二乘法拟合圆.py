@@ -62,7 +62,7 @@ print (('\n%-22s' +' %10s'*7) % tuple('方法 Xc Yc Rc nb_calls std(Ri) residu r
 print('-'*(22 +7*(10+1)))
 print(fmt % (method_2 , xc_2 , yc_2 , R_2 , ncalls_2 , Ri_2.std() , residu_2 , residu2_2 ))
 
-#输出图
+# #输出图
 p.close('all')
 
 def plot_all(residu2=False):
