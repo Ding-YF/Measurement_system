@@ -2,7 +2,9 @@ import cv2
 import numpy as np
 import math
 
-cap = cv2.VideoCapture(1)
+#url='http://169.254.37.90:8080/?action=stream'
+
+cap = cv2.VideoCapture(0)
 # fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # out = cv2.VideoWriter('output.avi',fourcc,20.0,(640,480))
 
@@ -33,7 +35,7 @@ while cap.isOpened():
                area.append(contour_area)
           max_index = np.argmax(area)
           squ_x, squ_y, w, h = cv2.boundingRect(contours[max_index])
-          cv2.rectangle(frame, (squ_x, squ_y), (squ_x + w, squ_y + h), (153, 153, 0), 5)
+          cv2.rectangle(frame, (squ_x, squ_y), (squ_x + w, squ_y + h), (0,0,255), 5)
           #(squ_x, squ_y), radius = cv2.minEnclosingCircle(contours[max_index])
           # cv2.circle(img, (int(chest_circle_x), int(chest_circle_y)), int(chest_radius), (0, 0, 255))
           print('x=', squ_x, 'y=', squ_y,'宽',w,'高',h)
@@ -47,6 +49,6 @@ while cap.isOpened():
      print(sp)
      cv2.imshow('test',frame)
      cv2.waitKey(15)
-     cv2.imshow('test2', frame_img_mask)
-     cv2.waitKey(15)
+     # cv2.imshow('test2', frame_img_mask)
+     # cv2.waitKey(15)
 
