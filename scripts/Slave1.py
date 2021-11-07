@@ -21,7 +21,7 @@ import double_multi as dm
 # f_handler=open('out.log', 'w')
 # sys.stdout=f_handler
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture('http://169.254.2.14:8080/?action=stream')
 # fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # out = cv2.VideoWriter('output.avi',fourcc,20.0,(640,480))
 
@@ -38,7 +38,7 @@ y_pointss = [14, 10, 28, 31, 18, 26,30,32,10.457]
 c = 1
 timeF = 8
 
-HOST = '169.254.37.134'
+HOST = '169.254.211.43'
 PORT = 8080
 ADDR = (HOST,PORT)
 BUFSIZE = 1024
@@ -50,8 +50,8 @@ def get_img():
         (ret,frame) = cap.read()
         frame = cv2.flip (frame,1)
         frame_img = frame
-        cv2.imshow('test', frame_img)
-        cv2.waitKey(15)
+        # cv2.imshow('test', frame_img)
+        # cv2.waitKey(15)
 th1 = threading.Thread(target=get_img)
 th1.setDaemon(True)
 th1.start()
@@ -67,8 +67,8 @@ def find_point(img):
             # print('-66-')
             contour_area = math.fabs(cv2.contourArea(cn))
             # if (contour_area>160 and contour_area < 350):
-            if (contour_area > 100 and contour_area < 400):
-                # print('-77-')
+            if (contour_area > 100):
+                print('-777-')
                 # print(cn)   ####程序到这里报错，因为cn是个轮廓
                 x_point, y_point, w, h = cv2.boundingRect(cn) #contours[cn]
                 # if (contour_area > 100 and contour_area < 400):
@@ -104,8 +104,12 @@ if __name__ == '__main__':
             # print(R)
     ######################## for test ##########################
             find_point(frame_img)
-            if len(x_points) == 1000:
+            print(12222)
+            if len(x_points) == 400:
+                print(13333)
                 R = dm.ys(x_points,y_points)
+                R = R + 242
+                R = R * 0.061972
                 if tcpCliSock is not None:
                     tcpCliSock.send(bytes(str(R), 'utf-8'))
                 x_points = []
