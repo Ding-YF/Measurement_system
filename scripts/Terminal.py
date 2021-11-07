@@ -70,14 +70,13 @@ def get_img1():
                 contour_area = math.fabs(cv2.contourArea(cn))
                 if (contour_area > 100):
                     x_point, y_point, w, h = cv2.boundingRect(cn)  # contours[cn]
-                    cv2.rectangle(frame, (x_point - 20, y_point), (x_point + w + 30, y_point + 355), (153, 153, 0), 5)
+                    cv2.rectangle(frame, (x_point - 20, y_point), (x_point + w + 30, y_point + 120), (0, 0, 255), 5)
         cv2.imshow('frame5', frame)
         cv2.waitKey(15)
 
-
-# th1 = threading.Thread(target=get_img1)
-# th1.setDaemon(True)
-# th1.start()
+th1 = threading.Thread(target=get_img1)
+th1.setDaemon(True)
+th1.start()
 
 def get_img2():
     while cap2.isOpened():
@@ -91,11 +90,9 @@ def get_img2():
                 contour_area = math.fabs(cv2.contourArea(cn))
                 if (contour_area > 100):  # and contour_area < 400
                     x_point, y_point, w, h = cv2.boundingRect(cn)  # contours[cn]
-                    cv2.rectangle(frame, (x_point - 20, y_point), (x_point + w + 30, y_point + h + 120), (153, 153, 0),
-                                  5)
+                    cv2.rectangle(frame, (x_point - 20, y_point), (x_point + w + 30, y_point + h + 120), (0, 0, 255),5)
         cv2.imshow('frame6', frame)
         cv2.waitKey(15)
-
 
 th2 = threading.Thread(target=get_img2)
 th2.setDaemon(True)
@@ -105,21 +102,21 @@ while True:
     op = input(">>>")
     if (op == "1"):
         tcpCliSock.send(bytes(op, 'utf-8'))
-
         data = tcpCliSock.recv(BUFSIZ)
         if not data:
             break
         data = data.decode('utf-8')
+
+        for i in range(0, 5):  # 声光
+            RPi.GPIO.output(18, True)
+            time.sleep(0.1)
+            RPi.GPIO.output(18, False)
+            time.sleep(0.1)
+        RPi.GPIO.cleanup()
+
         widget = Label(None, text=data)  # 生成
         widget.pack()  # 布置
         widget.mainloop()  # 开始时间循环
-
-        for i in range(0, 10):  # 声光
-            RPi.GPIO.output(18, True)
-            time.sleep(0.5)
-            RPi.GPIO.output(18, False)
-            time.sleep(0.5)
-        RPi.GPIO.cleanup()
 
         print('data from ', addr, data)
     elif (op == "2"):
@@ -141,5 +138,4 @@ while True:
         widget.mainloop(3)  # 开始时间循环
 
         print('data from ', addr2, data)
-
 tcpCliSock.close()
