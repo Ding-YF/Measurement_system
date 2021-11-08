@@ -80,18 +80,18 @@ th1.start()
 
 def get_img2():
     while cap2.isOpened():
-        (ret, frame) = cap2.read()
+        (ret, frame2) = cap2.read()
         # frame = cv2.flip(frame, 1)
-        frame_img_hsv = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)  # 将图片转换到HSV空间
-        frame_img_mask = cv2.inRange(frame_img_hsv, green[0], green[1])  # 二值化
-        (contours, hierarchy) = cv2.findContours(frame_img_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        frame_img_hsv2 = cv2.cvtColor(frame2, cv2.COLOR_RGB2HSV)  # 将图片转换到HSV空间
+        frame_img_mask2 = cv2.inRange(frame_img_hsv2, green[0], green[1])  # 二值化
+        (contours, hierarchy) = cv2.findContours(frame_img_mask2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         if len(contours) != 0:
             for cn in contours:
                 contour_area = math.fabs(cv2.contourArea(cn))
                 if (contour_area > 100):  # and contour_area < 400
                     x_point, y_point, w, h = cv2.boundingRect(cn)  # contours[cn]
-                    cv2.rectangle(frame, (x_point - 20, y_point), (x_point + w + 30, y_point + h + 120), (0, 0, 255),5)
-        cv2.imshow('frame6', frame)
+                    cv2.rectangle(frame2, (x_point - 20, y_point), (x_point + w + 30, y_point + h + 120), (0, 0, 255),5)
+        cv2.imshow('frame6', frame2)
         cv2.waitKey(15)
 
 th2 = threading.Thread(target=get_img2)
