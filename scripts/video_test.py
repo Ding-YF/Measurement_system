@@ -5,6 +5,7 @@ import math
 #url='http://169.254.37.90:8080/?action=stream'
 
 cap = cv2.VideoCapture(0)
+# cap2 = cv2.VideoCapture(1)
 # fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # out = cv2.VideoWriter('output.avi',fourcc,20.0,(640,480))
 
@@ -19,6 +20,7 @@ squ_y = None
 
 while cap.isOpened():
      (ret,frame) = cap.read()
+     # (ret2, frame2) = cap2.read()
      frame = cv2.flip (frame,1)
      frame_img = frame
      # frame_img_bgr = cv2.cvtColor(frame_img, cv2.COLOR_RGB2BGR)  # 将图片转换到BRG空间
@@ -35,7 +37,7 @@ while cap.isOpened():
                area.append(contour_area)
           max_index = np.argmax(area)
           squ_x, squ_y, w, h = cv2.boundingRect(contours[max_index])
-          cv2.rectangle(frame, (squ_x, squ_y), (squ_x + w, squ_y + h), (0,0,255), 5)
+          cv2.rectangle(frame, (squ_x, squ_y), (squ_x + w+30, squ_y +200), (0,0,255), 5)
           #(squ_x, squ_y), radius = cv2.minEnclosingCircle(contours[max_index])
           # cv2.circle(img, (int(chest_circle_x), int(chest_circle_y)), int(chest_radius), (0, 0, 255))
           print('x=', squ_x, 'y=', squ_y,'宽',w,'高',h)
@@ -49,6 +51,6 @@ while cap.isOpened():
      print(sp)
      cv2.imshow('test',frame)
      cv2.waitKey(15)
-     # cv2.imshow('test2', frame_img_mask)
+     # cv2.imshow('test2', frame2)
      # cv2.waitKey(15)
 

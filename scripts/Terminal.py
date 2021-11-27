@@ -138,4 +138,19 @@ while True:
         widget.mainloop(3)  # 开始时间循环
 
         print('data from ', addr2, data)
+    elif (op == "3"):
+        print('in 3')
+        time.sleep(5)
+        xita = 30
+        for i in range(0, 5):  # 声光
+            RPi.GPIO.output(18, True)
+            time.sleep(0.1)
+            RPi.GPIO.output(18, False)
+            time.sleep(0.1)
+        RPi.GPIO.cleanup()
+
+        widget = Label(None, text=xita)  # 生成
+        widget.pack()  # 布置
+        widget.mainloop()  # 开始时间循环
+
 tcpCliSock.close()
